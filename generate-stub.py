@@ -9,7 +9,7 @@ from StringIO import StringIO
 
 def main():
     script_dir = dirname(__file__)
-    in_file = relpath(join(script_dir, "Live9.6.xml"))
+    in_file = relpath(join(script_dir, "Live.xml"))
     out_dir = relpath(join(script_dir, "Live"))
     out_file = join(out_dir, "__init__.py")
     if not exists(out_dir):
@@ -38,6 +38,8 @@ def generate(in_file, out_file):
 
 
 def generate_code(tag, name, doc, f):
+    if doc is not None:
+        doc = doc.replace("&gt;",">").replace("&lt;","<").replace("&amp;gt;",">").replace("&amp;lt;","<").replace("&amp;","&")
     if tag is not None and name is not None and name != "Live":
         level = name.count(".")-1
         indent = "    "*level
